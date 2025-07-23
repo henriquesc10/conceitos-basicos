@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ItemLista } from './itemlista';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-lista-compras',
-  imports: [ FormsModule ],
+  imports: [FormsModule, CommonModule],
   templateUrl: './lista-compras.component.html',
   styleUrl: './lista-compras.component.scss'
 })
 
 export class ListaComprasComponent {
-  
+
   item: string = "";
   lista: ItemLista[] = [];
 
-  adicionarItem(){
+  adicionarItem() {
     let itemlista = new ItemLista();
     itemlista.nome = this.item;
     itemlista.id = this.lista.length + 1;
@@ -22,7 +23,13 @@ export class ListaComprasComponent {
     this.lista.push(itemlista);
 
     this.item = '';
+  }
 
-    console.table(this.lista);
+  riscarItem(itemlista: ItemLista) {
+    itemlista.comprado = !itemlista.comprado;
+  }
+
+  limparLista() {
+    this.lista = []
   }
 }
